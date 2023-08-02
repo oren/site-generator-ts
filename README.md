@@ -30,4 +30,3 @@ npx is a shortcut for npm exec, which runs scripts from packages, and ts-node is
 
 * https://www.typescripttutorial.net/typescript-tutorial/nodejs-typescript/
 
-

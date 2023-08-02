@@ -1,0 +1,23 @@
+{
+  "name": "site-generator-ts",
+  "version": "1.0.0",
+  "description": "site generator in TypeScript",
+  "main": "app.js",
+  "scripts": {
+		"start:build": "tsc -w",
+    "start:run": "nodemon build/app.js",
+    "start": "concurrently npm:start:*",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/oren/site-generator-ts.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/oren/site-generator-ts/issues"
+  },
+  "homepage": "https://github.com/oren/site-generator-ts#readme"
+}

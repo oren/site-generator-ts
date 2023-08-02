@@ -1,4 +1,15 @@
+# Static site generator in TypeScript
+
+## Setup
+```
+npm install --g nodemon concurrently
+npm start
+```
+
+Make change to app.ts and it will be compiled automatically
+
 ## TODO
+
 If you are unfamiliar with project setup, it's going to take some time to get it all figured out and going, here's what I would do:
 *	Set up a basic hello world project.
 *	Set up compiling with TS. Goal is to have source code in src/**/*.ts, and a script in package.json such that when you run it, it uses tsc to compile to dist/**/*.js.
@@ -14,3 +25,8 @@ If you are unfamiliar with project setup, it's going to take some time to get it
 `npx ts-node ~/scripts/site-generator.ts`
 
 npx is a shortcut for npm exec, which runs scripts from packages, and ts-node is a wrapper for node that compiles and runs ts as a single step; it's essentially tsc and node in a single command
+
+## References
+
+* https://www.typescripttutorial.net/typescript-tutorial/nodejs-typescript/
+

@@ -1,0 +1,26 @@
+<h1 id="staticsitegeneratorintypescript">Static site generator in TypeScript</h1>
+<h2 id="setup">Setup</h2>
+<pre><code>npm install --g nodemon concurrently
+npm start
+</code></pre>
+<p>Make change to app.ts and it will be compiled automatically</p>
+<h2 id="todo">TODO</h2>
+<p>If you are unfamiliar with project setup, it's going to take some time to get it all figured out and going, here's what I would do:</p>
+<ul>
+<li>Set up a basic hello world project.</li>
+<li>Set up compiling with TS. Goal is to have source code in src/<strong>/<em>.ts, and a script in package.json such that when you run it, it uses tsc to compile to dist/</strong>/</em>.js.</li>
+<li>Set up a quicker iteration loop, for example I personally like tsx. Goal is to have a script that will use tsx to watch and rerun your project whenever changes happen, so you can change your code and immediately see how it executes without having to compile everything.</li>
+<li>Now you can start writing your actual CLI code and enjoy a fast iteration loop.</li>
+<li>Set up the bin field of your package.json so your package can be used as a CLI tool. You also need a hashbang in your entry file.</li>
+<li>Run the compile script.</li>
+<li>npm link your package so now it's globally installed on your local computer.</li>
+<li>Run and test your CLI.</li>
+</ul>
+<h2 id="notes">Notes</h2>
+<p><code>npx ts-node ~/scripts/site-generator.ts</code></p>
+<p>npx is a shortcut for npm exec, which runs scripts from packages, and ts-node is a wrapper for node that compiles and runs ts as a single step; it's essentially tsc and node in a single command</p>
+<h2 id="references">References</h2>
+<ul>
+<li>https://www.typescripttutorial.net/typescript-tutorial/nodejs-typescript/</li>
+<li>https://github.com/SteveRidout/flashdown/tree/master</li>
+</ul>

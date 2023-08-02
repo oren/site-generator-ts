@@ -11,7 +11,7 @@ const getDirectories = source =>
     .map(dirent => dirent.name)
 
 // convert README.md to index.html
-function convertFile() {
+const convertFile = () => {
 	if (fs.existsSync("README.md")) {
 		let text = fs.readFileSync("./README.md", "utf-8");
 		let html = converter.makeHtml(text)

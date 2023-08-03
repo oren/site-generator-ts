@@ -6,8 +6,9 @@ const showdown = require('showdown');
 const converter = new showdown.Converter();
 const fs = require("fs");
 const path = require('node:path');
+showdown.setFlavor('github');
 showdown.setOption('ghCompatibleHeaderId', true);
-const convert = directory => {
+const convert = (directory) => {
     if (directory === '.git' || directory === 'node_modules')
         return;
     // convert README.md to index.html
@@ -27,7 +28,7 @@ const convertToHTML = (dir) => {
         fs.writeFileSync(indexFile, html);
     }
 };
-const getDirectories = dir => fs.readdirSync(dir, { withFileTypes: true })
+const getDirectories = (dir) => fs.readdirSync(dir, { withFileTypes: true })
     .filter(direct => direct.isDirectory())
     .map(direct => path.join(dir, direct.name));
 convert('/tmp/test-website');

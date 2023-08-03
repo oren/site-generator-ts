@@ -3,10 +3,15 @@
 //   convert README.md to index.html
 //   call itself on each sub-folder
 const showdown = require('showdown');
+showdown.setFlavor('github');
+showdown.setOption('ghCompatibleHeaderId', true);
+showdown.setOption('tablesHeaderId', true);
 const converter = new showdown.Converter();
 const fs = require("fs");
 const path = require('node:path');
-showdown.setFlavor('github');
+const Mustache = require('mustache');
+Mustache.escape = function (text) { return text; };
+const template = fs.readFileSync(path.resolve(__dirname, "template.html"), "utf-8");
 const convert = (dir) => {
     if (dir === '.git' || dir === 'node_modules')
         return;
@@ -23,8 +28,16 @@ const convertToHTML = (dir) => {
     const indexFile = path.join(dir, "index.html");
     if (fs.existsSync(readmeFile)) {
         let text = fs.readFileSync(readmeFile, "utf-8");
-        let html = converter.makeHtml(text);
-        fs.writeFileSync(indexFile, html);
+        let main_content = converter.makeHtml(text);
+        let sideBar = "";
+        let navBar = "";
+        const view = {
+            main_content,
+            sideBar,
+            navBar
+        };
+        const output = Mustache.render(template, view);
+        fs.writeFileSync(indexFile, output);
     }
 };
 const getDirectories = (dir) => fs.readdirSync(dir, { withFileTypes: true })

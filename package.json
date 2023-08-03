@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/oren/site-generator-ts#readme",
   "dependencies": {
+    "mustache": "^4.2.0",
     "showdown": "^2.1.0"
   }
 }

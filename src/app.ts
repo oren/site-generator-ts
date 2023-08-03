@@ -3,11 +3,18 @@
 //   call itself on each sub-folder
 
 const showdown  = require('showdown')
+showdown.setFlavor('github');
+showdown.setOption('ghCompatibleHeaderId', true);
+showdown.setOption('tablesHeaderId', true);
+
 const	converter = new showdown.Converter()
 const fs = require("fs");
 const path = require('node:path');
+const Mustache = require('mustache');
 
-showdown.setFlavor('github');
+Mustache.escape = function(text) {return text;};.
+
+const template = fs.readFileSync(path.resolve(__dirname, "template.html"), "utf-8")
 
 const convert = (dir: string) => {
 	if(dir=== '.git' || dir=== 'node_modules') return
@@ -27,8 +34,19 @@ const convertToHTML = (dir: string) => {
 
 	if (fs.existsSync(readmeFile)) {
 		let text = fs.readFileSync(readmeFile, "utf-8");
-		let html = converter.makeHtml(text)
-		fs.writeFileSync(indexFile, html);
+		let main_content = converter.makeHtml(text)
+		let sideBar = ""
+		let navBar = ""
+
+		const view = {
+			main_content,
+			sideBar,
+			navBar
+		};
+
+		const output = Mustache.render(template, view);
+
+		fs.writeFileSync(indexFile, output);
 	}
 }
 
@@ -38,3 +56,5 @@ const getDirectories = (dir: string) =>
     .map(direct => path.join(dir, direct.name))
 
 convert('/tmp/test-website')
+
+

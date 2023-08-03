@@ -1,26 +1,40 @@
-// convert README.md to index.html
-// call the function on each sub-folder
+// function that recieves a path
+//   convert README.md to index.html
+//   call itself on each sub-folder
+
 const showdown  = require('showdown')
 const	converter = new showdown.Converter()
 const fs = require("fs");
+const path = require('node:path');
 showdown.setOption('ghCompatibleHeaderId', true);
 
-const getDirectories = source =>
-  fs.readdirSync(source, { withFileTypes: true })
-    .filter(dirent => dirent.isDirectory())
-    .map(dirent => dirent.name)
+const convert = directory => {
+	if(directory === '.git') return
+	if(directory === 'node_modules') return
+
+	// convert README.md to index.html
+	convertToHTML(directory)
+	let dirs = getDirectories(directory)
+	dirs.forEach(dir => {
+		convert(dir)
+	})
+}
 
 // convert README.md to index.html
-const convertFile = () => {
-	if (fs.existsSync("README.md")) {
-		let text = fs.readFileSync("./README.md", "utf-8");
+const convertToHTML = (dir) => {
+	const readmeFile = path.join(dir, "README.md")
+	const indexFile = path.join(dir, "index.html")
+
+	if (fs.existsSync(readmeFile)) {
+		let text = fs.readFileSync(readmeFile, "utf-8");
 		let html = converter.makeHtml(text)
-		fs.writeFileSync('index.html', html);
+		fs.writeFileSync(indexFile, html);
 	}
 }
 
-convertFile()
-let dirs = getDirectories(".")
-dirs.forEach(dir => console.log(dir))
+const getDirectories = dir =>
+  fs.readdirSync(dir, { withFileTypes: true })
+    .filter(direct => direct.isDirectory())
+    .map(direct => path.join(dir, direct.name))
 
-
+convert('/tmp/test-website')

@@ -1,3 +1,4 @@
+#!/usr/bin/env node
 "use strict";
 // function that recieves a path
 //   convert README.md to index.html
@@ -15,6 +16,7 @@ const template = fs.readFileSync(path.resolve(__dirname, "template.html"), "utf-
 const convert = (dir) => {
     if (dir === '.git' || dir === 'node_modules')
         return;
+    console.log(dir);
     // convert README.md to index.html
     convertToHTML(dir);
     let directories = getDirectories(dir);
@@ -53,4 +55,4 @@ const convertToHTML = (dir) => {
 const getDirectories = (dir) => fs.readdirSync(dir, { withFileTypes: true })
     .filter(direct => direct.isDirectory())
     .map(direct => path.join(dir, direct.name));
-convert('/tmp/test-website/swim');
+convert('/tmp/test-website');

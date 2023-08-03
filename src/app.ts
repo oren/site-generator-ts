@@ -9,8 +9,7 @@ const path = require('node:path');
 showdown.setOption('ghCompatibleHeaderId', true);
 
 const convert = directory => {
-	if(directory === '.git') return
-	if(directory === 'node_modules') return
+	if(directory === '.git' || directory === 'node_modules') return
 
 	// convert README.md to index.html
 	convertToHTML(directory)

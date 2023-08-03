@@ -12,7 +12,7 @@ const fs = require("fs");
 const path = require('node:path');
 const Mustache = require('mustache');
 
-Mustache.escape = function(text) {return text;};.
+// Mustache.escape = function(text) {return text;};.
 
 const template = fs.readFileSync(path.resolve(__dirname, "template.html"), "utf-8")
 
@@ -31,21 +31,32 @@ const convert = (dir: string) => {
 const convertToHTML = (dir: string) => {
 	const readmeFile = path.join(dir, "README.md")
 	const indexFile = path.join(dir, "index.html")
+	const sideBarFile = path.join(dir, "_sidebar.md")
+	const navBarFile = path.join(dir, "..", "_navbar.md")
 
 	if (fs.existsSync(readmeFile)) {
 		let text = fs.readFileSync(readmeFile, "utf-8");
-		let main_content = converter.makeHtml(text)
+		let mainContent = converter.makeHtml(text)
 		let sideBar = ""
 		let navBar = ""
 
+		if (fs.existsSync(sideBarFile)) {
+			let text = fs.readFileSync(sideBarFile, "utf-8");
+			sideBar = converter.makeHtml(text)
+		}
+
+		if (fs.existsSync(navBarFile)) {
+			let text = fs.readFileSync(navBarFile, "utf-8");
+			navBar = converter.makeHtml(text)
+		}
+
 		const view = {
-			main_content,
+			mainContent,
 			sideBar,
 			navBar
 		};
 
 		const output = Mustache.render(template, view);
-
 		fs.writeFileSync(indexFile, output);
 	}
 }
@@ -55,6 +66,4 @@ const getDirectories = (dir: string) =>
     .filter(direct => direct.isDirectory())
     .map(direct => path.join(dir, direct.name))
 
-convert('/tmp/test-website')
-
-
+convert('/tmp/test-website/swim')

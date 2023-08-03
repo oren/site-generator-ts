@@ -7,15 +7,14 @@ const converter = new showdown.Converter();
 const fs = require("fs");
 const path = require('node:path');
 showdown.setFlavor('github');
-showdown.setOption('ghCompatibleHeaderId', true);
-const convert = (directory) => {
-    if (directory === '.git' || directory === 'node_modules')
+const convert = (dir) => {
+    if (dir === '.git' || dir === 'node_modules')
         return;
     // convert README.md to index.html
-    convertToHTML(directory);
-    let dirs = getDirectories(directory);
-    dirs.forEach(dir => {
-        convert(dir);
+    convertToHTML(dir);
+    let directories = getDirectories(dir);
+    directories.forEach(directory => {
+        convert(directory);
     });
 };
 // convert README.md to index.html

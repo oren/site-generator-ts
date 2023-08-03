@@ -8,6 +8,7 @@ npm start
 
 * Make change to app.ts and it will be compiled automatically
 * The program can be run anywhere using `website-ts`.
+* The template.html file is located in the 'build' folder
 
 ## Notes
 
@@ -27,15 +28,8 @@ I use nodemon and concurrently locally. They can also installed with globally (w
 
 ## TODO
 
-If you are unfamiliar with project setup, it's going to take some time to get it all figured out and going, here's what I would do:
-*	Set up a basic hello world project.
-*	Set up compiling with TS. Goal is to have source code in src/**/*.ts, and a script in package.json such that when you run it, it uses tsc to compile to dist/**/*.js.
-*	Set up a quicker iteration loop, for example I personally like tsx. Goal is to have a script that will use tsx to watch and rerun your project whenever changes happen, so you can change your code and immediately see how it executes without having to compile everything.
-*	Now you can start writing your actual CLI code and enjoy a fast iteration loop.
-*	Set up the bin field of your package.json so your package can be used as a CLI tool. You also need a hashbang in your entry file.
-*	Run the compile script.
-*	npm link your package so now it's globally installed on your local computer.
-*	Run and test your CLI.
+* Find out if template.html can be in the src instead of build folder.
+* Currently the css file is external. Try to use a local file instead.
 
 ## References
 

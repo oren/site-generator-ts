@@ -2,6 +2,7 @@
 
 ## Setup
 ```
+npm install -g typescript #TODO: verify if that's a good approach
 npm install
 npm start
 ```

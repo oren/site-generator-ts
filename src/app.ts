@@ -70,4 +70,4 @@ const getDirectories = (dir: string) =>
     .filter(direct => direct.isDirectory())
     .map(direct => path.join(dir, direct.name))
 
-convert('/tmp/test-website')
+convert('.')

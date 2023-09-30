@@ -17,7 +17,7 @@
   "author": "",
   "license": "ISC",
   "bin": {
-    "website-ts": "./build/app.js"
+    "site": "./build/app.js"
   },
   "bugs": {
     "url": "https://github.com/oren/site-generator-ts/issues"

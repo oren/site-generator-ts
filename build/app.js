@@ -55,4 +55,4 @@ const convertToHTML = (dir) => {
 const getDirectories = (dir) => fs.readdirSync(dir, { withFileTypes: true })
     .filter(direct => direct.isDirectory())
     .map(direct => path.join(dir, direct.name));
-convert('/tmp/test-website');
+convert('.');

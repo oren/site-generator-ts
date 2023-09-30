@@ -7,17 +7,18 @@ npm install
 npm start
 ```
 
-* Make change to app.ts and it will be compiled automatically
-* The program can be run anywhere using `website-ts`.
+## Development flow
+* When I change app.ts, the typescript compiler generate build/app.js
+* The command `npm link` allow me to run the program as a script from any location on my laptop with the command `site`. The location of the js file is /home/oren/.nvm/versions/node/v18.18.0/bin/site
 * The template.html file is located in the 'build' folder
 
 ## Notes
 
 ### Run as linux script
-In order to run this program as a linux script, with ./app.js I added the first line: #!/usr/bin/env node.
+In order to run this program as a linux script, in ./app.js I added the first line: #!/usr/bin/env node.
 
 ### Nicer name for the script
-* In order to call the script with `website-ts` instead of ./app.js I have an entry in package.json called bin.
+* In order to call the script with `site` instead of ./app.js I have an entry in package.json called bin.
 This only worked after I also run the command `npm link` which allow me to call my program anywhere on my laptop.
 * In order to unlink, run `npm unlink website-ts`.
 

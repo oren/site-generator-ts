@@ -1,26 +1,133 @@
-<h1 id="staticsitegeneratorintypescript">Static site generator in TypeScript</h1>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://sindresorhus.com/github-markdown-css/github-markdown.css">
+
+<style>
+	body {
+		font-family: Helvetica;
+		font-size: 20px;
+		box-sizing: border-box;
+		min-width: 200px;
+		max-width: 980px;
+		margin: 0 auto;
+		padding: 45px;
+	}
+
+	.sidenav {
+		font-size: 14px;
+		float: left;
+		height: 100%;
+		width: 160px;
+		list-style: none;
+	}
+
+	.sidenav ul {
+		list-style: none;
+	}
+
+	article {
+		float: right;
+		max-width:600px;
+		background-color: white;
+	}
+
+	.markdown-body {
+		background-color: white;
+		color: black;
+	}
+
+	h1 {
+		color: black;
+	}
+
+	h2 {
+		color: black;
+	}
+
+	h3 {
+		color: black;
+	}
+
+	iframe {
+		width: 100%;
+		max-width: 640px;
+	}
+
+	.video-container {
+		position:relative;
+		padding-bottom:56.25%;
+		padding-top:30px;
+		height:0;
+		overflow:hidden;
+	}
+
+	.video-container iframe, .video-container object, .video-container embed {
+		position:absolute;
+		top:0;
+		left:0;
+		width:100%;
+		height:100%;
+	}
+
+	@media (max-width: 767px) {
+		body {
+			padding: 15px;
+		}
+
+		.sidenav {
+			display: none;
+		}
+	}
+
+	.header ul {
+		list-style: none;
+		padding-left: 0px;
+	}
+</style>
+
+<div class="header">
+	
+</div>
+
+<div class="sidenav">
+	
+</div>
+
+<article class="markdown-body" style="font-size: 20px;">
+	<h1 id="static-site-generator-in-typescript">Static site generator in TypeScript</h1>
 <h2 id="setup">Setup</h2>
-<pre><code>npm install --g nodemon concurrently
-npm start
-</code></pre>
-<p>Make change to app.ts and it will be compiled automatically</p>
-<h2 id="todo">TODO</h2>
-<p>If you are unfamiliar with project setup, it's going to take some time to get it all figured out and going, here's what I would do:</p>
+<pre><code>npm install -g typescript #TODO: verify if that's a good approach
+npm install
+npm start</code></pre>
 <ul>
-<li>Set up a basic hello world project.</li>
-<li>Set up compiling with TS. Goal is to have source code in src/<strong>/<em>.ts, and a script in package.json such that when you run it, it uses tsc to compile to dist/</strong>/</em>.js.</li>
-<li>Set up a quicker iteration loop, for example I personally like tsx. Goal is to have a script that will use tsx to watch and rerun your project whenever changes happen, so you can change your code and immediately see how it executes without having to compile everything.</li>
-<li>Now you can start writing your actual CLI code and enjoy a fast iteration loop.</li>
-<li>Set up the bin field of your package.json so your package can be used as a CLI tool. You also need a hashbang in your entry file.</li>
-<li>Run the compile script.</li>
-<li>npm link your package so now it's globally installed on your local computer.</li>
-<li>Run and test your CLI.</li>
+<li>Make change to app.ts and it will be compiled automatically</li>
+<li>The program can be run anywhere using <code>website-ts</code>.</li>
+<li>The template.html file is located in the 'build' folder</li>
 </ul>
 <h2 id="notes">Notes</h2>
-<p><code>npx ts-node ~/scripts/site-generator.ts</code></p>
-<p>npx is a shortcut for npm exec, which runs scripts from packages, and ts-node is a wrapper for node that compiles and runs ts as a single step; it's essentially tsc and node in a single command</p>
+<h3 id="run-as-linux-script">Run as linux script</h3>
+<p>In order to run this program as a linux script, with ./app.js I added the first line: #!/usr/bin/env node.</p>
+<h3 id="nicer-name-for-the-script">Nicer name for the script</h3>
+<ul>
+<li>In order to call the script with <code>website-ts</code> instead of ./app.js I have an entry in package.json called bin.<br />
+This only worked after I also run the command <code>npm link</code> which allow me to call my program anywhere on my laptop.</li>
+<li>In order to unlink, run <code>npm unlink website-ts</code>.</li>
+</ul>
+<h2 id="automatic-build-on-file-change">Automatic build on file change</h2>
+<p>I use nodemon and concurrently locally. They can also installed with globally (with -g).</p>
+<h3 id="other-ways-to-run-ts-files">Other ways to run ts files</h3>
+<ul>
+<li><code>npx ts-node ~/scripts/site-generator.ts</code>. npx is a shortcut for npm exec, which runs scripts from packages, and ts-node is a wrapper for node that compiles and runs ts as a single step; it's essentially tsc and node in a single command</li>
+</ul>
+<h2 id="todo">TODO</h2>
+<ul>
+<li>Find out if template.html can be in the src instead of build folder.</li>
+<li>Currently the css file is external. Try to use a local file instead.</li>
+</ul>
 <h2 id="references">References</h2>
 <ul>
-<li>https://www.typescripttutorial.net/typescript-tutorial/nodejs-typescript/</li>
-<li>https://github.com/SteveRidout/flashdown/tree/master</li>
+<li><a href="https://www.typescripttutorial.net/typescript-tutorial/nodejs-typescript/">https://www.typescripttutorial.net/typescript-tutorial/nodejs-typescript/</a></li>
+<li><a href="https://github.com/showdownjs/showdown">https://github.com/showdownjs/showdown</a></li>
+<li><a href="https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e">https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e</a></li>
+<li><a href="https://github.com/SteveRidout/flashdown/tree/master">https://github.com/SteveRidout/flashdown/tree/master</a></li>
 </ul>
+</article>
